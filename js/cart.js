@@ -16,7 +16,14 @@ function agregarAlPlan(id) {
     let cursoToAdd = cursos.find(curso => curso.id === parseInt(id))
     const cursoExistente = coursesCart.some(curso => curso.id === parseInt(id))
     if (cursoExistente) {
-        alert("No podés agregar dos veces el mismo curso")
+        Toastify({
+            text: "No podés agregar el mismo curso 2 veces.",
+            duration: 2000,
+            style: {
+                background: "red",
+            },
+            close: true,
+        }).showToast();
     } else {
         coursesCart.push(cursoToAdd);
 
