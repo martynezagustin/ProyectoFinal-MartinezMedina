@@ -1,15 +1,15 @@
 //selección de las filas de las categorías
 
 //selecciona los cursos por categoría
-fetch("./courses.json")
-.then(response => response.json)
+fetch("../js/courses.json")
+.then(response => response.json())
 .then(data => {
     const rowProgramacion = document.querySelector('.programacion')
     const rowMarketingAndEmpresas = document.querySelector('.marketing')
     console.log(data);
-    JSON.parse(localStorage.setItem('Cursos', JSON.stringify(data)))
-    let cursosProgram = data.filter((curso) => curso.categoria === 'Programación')
-    let cursosMarketingAndEmpresas = data.filter((curso) => curso.categoria === 'Marketing y Empresas')
+    localStorage.setItem('CursosList', JSON.stringify(data))
+    data.filter((curso) => curso.categoria === 'Programación')
+    data.filter((curso) => curso.categoria === 'Marketing y Empresas')
     // let cursosPlanFormacionJSON = (idCurso, curso) => {localStorage.setItem(idCurso, curso)}
     
     
