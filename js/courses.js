@@ -4,12 +4,14 @@
 fetch("../js/courses.json")
 .then(response => response.json())
 .then(data => {
+
+    const cursos = data["cursos"]
+
     const rowProgramacion = document.querySelector('.programacion')
     const rowMarketingAndEmpresas = document.querySelector('.marketing')
-    console.log(data);
-    localStorage.setItem('CursosList', JSON.stringify(data))
-    data.filter((curso) => curso.categoria === 'Programación')
-    data.filter((curso) => curso.categoria === 'Marketing y Empresas')
+
+    const cursosProgram = cursos.filter((curso) => curso.categoria === 'Programación')
+    const cursosMarketingAndEmpresas = cursos.filter((curso) => curso.categoria === 'Marketing y Empresas')
     // let cursosPlanFormacionJSON = (idCurso, curso) => {localStorage.setItem(idCurso, curso)}
     
     
