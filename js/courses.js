@@ -1,6 +1,6 @@
-//selección de las filas de las categorías
 
-//selecciona los cursos por categoría
+const cursosGlobal = []
+
 fetch("../js/courses.json")
 .then(response => response.json())
 .then(data => {
@@ -10,6 +10,8 @@ fetch("../js/courses.json")
     const rowProgramacion = document.querySelector('.programacion')
     const rowMarketingAndEmpresas = document.querySelector('.marketing')
 
+    localStorage.setItem('CursosList', JSON.stringify(data))
+
     const cursosProgram = cursos.filter((curso) => curso.categoria === 'Programación')
     const cursosMarketingAndEmpresas = cursos.filter((curso) => curso.categoria === 'Marketing y Empresas')
     // let cursosPlanFormacionJSON = (idCurso, curso) => {localStorage.setItem(idCurso, curso)}
@@ -17,6 +19,9 @@ fetch("../js/courses.json")
     
     //crea cursos en marketing y empresas por cada uno en categoría 'Programación'
     cursosProgram.forEach((curso) => {
+
+        cursosGlobal.push(curso)
+
         const cursoDiv = document.createElement('div')
         cursoDiv.classList.add('card')
         cursoDiv.classList.add('ancho-card')
@@ -34,6 +39,9 @@ fetch("../js/courses.json")
     
     //crea cursos en marketing y empresas por cada uno en categoría 'Marketing y Empresas'
     cursosMarketingAndEmpresas.forEach((curso) => {
+
+        cursosGlobal.push(curso)
+
         const cursoDiv = document.createElement('div')
         cursoDiv.classList.add('card')
         cursoDiv.classList.add('ancho-card')
@@ -63,4 +71,9 @@ fetch("../js/courses.json")
             window.location.href = 'course_detail.html'
         })
     })
+
+    cargarEvento()
+})
+.catch(error => {
+    alert("Los cursos no pueden cargar porque ocurrió el siguiente error: " + error)
 })
