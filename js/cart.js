@@ -4,16 +4,20 @@ const botonVaciar = document.getElementById('vaciar-carrito')
 
 let coursesCart = JSON.parse(localStorage.getItem('Cursos')) || []
 //funcionalidad de botones de ADD
-const buttonAdd = document.querySelectorAll('.btn-add')
-buttonAdd.forEach((agregar) => {
-    agregar.addEventListener("click", (e) => {
-        agregarAlPlan(e.target.id)
-    })
 
-})
+const cargarEvento = () => {
+    const buttonAdd = document.querySelectorAll('.btn-add')
+    buttonAdd.forEach((agregar) => {
+        agregar.addEventListener("click", (e) => {
+            agregarAlPlan(e.target.id)
+        })
+    
+    })
+}
+
 //agrega al carrito de formación
 function agregarAlPlan(id) {
-    let cursoToAdd = cursos.find(curso => curso.id === parseInt(id))
+    let cursoToAdd = cursosGlobal.find(curso => curso.id === parseInt(id))
     const cursoExistente = coursesCart.some(curso => curso.id === parseInt(id))
     if (cursoExistente) {
         Toastify({
