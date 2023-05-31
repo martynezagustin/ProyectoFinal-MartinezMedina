@@ -4,7 +4,6 @@ const cursosGlobal = []
 fetch("../js/courses.json")
 .then(response => response.json())
 .then(data => {
-
     const cursos = data["cursos"]
 
     const rowProgramacion = document.querySelector('.programacion')
@@ -30,7 +29,7 @@ fetch("../js/courses.json")
         <h5 class="card-title">${curso.nombre}</h5>
         <p class="card-duration"><b>Duración: <i>${curso.duracion}</i></b></p>
         <p class="card-text">${curso.descripcion}</p>
-        <a href="#" class="btn btn-add btn-secondary" id="${curso.id}">AÑADIR A MI PLAN</a>
+        <button class="btn btn-add btn-secondary" id="${curso.id}">AÑADIR A MI PLAN</button>
         <a href="./course_detail.html" class="btn btn-view-course mt-2 btn-secondary" id="${curso.referenceHTML}">VER CURSO</a>
         </div>`
     
@@ -51,7 +50,7 @@ fetch("../js/courses.json")
                     <h5 class="card-title">${curso.nombre}</h5>
                     <p class="card-duration"><b>Duración: <i>${curso.duracion}</i></b></p>
                     <p class="card-text">${curso.descripcion}</p>
-                    <a href="#" class="btn btn-add btn-secondary" id="${curso.id}">AÑADIR A MI PLAN</a>
+                    <button class="btn btn-add btn-secondary" id="${curso.id}">AÑADIR A MI PLAN</button>
                     <a href="./course_detail.html" class="btn btn-view-course mt-2 btn-secondary" id="${curso.referenceHTML}">VER CURSO</a>
                     </div>`
     
