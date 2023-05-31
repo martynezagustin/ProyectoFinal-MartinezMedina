@@ -69,9 +69,31 @@ function renderizarCarrito() {
 function removeCurso(id) {
     const cursoARemover = coursesCart.find((curso) => curso.id === id)
     const index = coursesCart.indexOf(cursoARemover)
-    coursesCart.splice(index, 1)
-    localStorage.setItem("Cursos", JSON.stringify(coursesCart))
-    renderizarCarrito()
+    Swal.fire({
+        title: '¿Desea remover el siguiente curso? ' +  cursoARemover.nombre,
+        text: "Deberá volverlo a agregar en todo caso...",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, deseo borrarlo',
+        cancelButtonText: 'No, no quiero'
+      }).then((result) => {
+        console.log(result);
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Ha eliminado el curso de su Plan de Formación',
+            'Acción realizada con éxito'
+          )
+          coursesCart.splice(index, 1)
+          localStorage.setItem("Cursos", JSON.stringify(coursesCart))
+          renderizarCarrito()
+        } else{
+            Swal.fire(
+                'Puede seguir disfrutando de su curso entonces 😊',
+              )
+        }
+      })
 }
 
 botonVaciar.addEventListener("click", () => {
