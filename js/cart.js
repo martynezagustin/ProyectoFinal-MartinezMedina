@@ -32,8 +32,8 @@ function agregarAlPlan(id) {
         coursesCart.push(cursoToAdd);
 
         Toastify({
-            text: "Perfecto! Agregaste " + cursoToAdd.nombre + " a tu plan de formación!",
-            duration: 2000,
+            text: "Perfecto! Agregaste " + cursoToAdd.nombre + " a tu plan de formación! 🚀",
+            duration: 1800,
             style: {
                 background: "linear-gradient(to right, rgb(52,52,52), rgb(12, 12, 12))",
             }
