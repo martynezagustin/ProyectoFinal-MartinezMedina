@@ -32,7 +32,7 @@ function agregarAlPlan(id) {
         coursesCart.push(cursoToAdd);
 
         Toastify({
-            text: "Perfecto! Agregaste " + cursoToAdd.nombre + " a tu plan de formación! 🚀",
+            text: "Agregaste el " + cursoToAdd.nombre + " a tu plan de formación! 🚀",
             duration: 1800,
             style: {
                 background: "linear-gradient(to right, rgb(52,52,52), rgb(12, 12, 12))",
@@ -59,15 +59,19 @@ function renderizarCarrito() {
             <h5 class="card-title">${curso.nombre}</h5>
             <p class="card-duration"><b>Duración: <i>${curso.duracion}</i></b></p>
             <p class="card-text">${curso.descripcion}</p>
-            <button onclick=removeCurso(${curso.id}) class="btn btn-add btn-secondary" id="${curso.id}">ELIMINAR</button>
+            <button class="btn btn-remove btn-secondary" data-id=${curso.id} id="curso-${curso.id}">ELIMINAR</button>
             </div>`
             containerFormacion.append(div)
+            const btnRemove = document.querySelectorAll('.btn-remove')
+            btnRemove.forEach((boton) => {
+                boton.addEventListener("click", removeCurso)
+            })
         })
     }
 }
 //remueve el curso
-function removeCurso(id) {
-    const cursoARemover = coursesCart.find((curso) => curso.id === id)
+function removeCurso(e) {
+    const cursoARemover = coursesCart.find((curso) => curso.id === parseInt(e.target.dataset.id))
     const index = coursesCart.indexOf(cursoARemover)
     Swal.fire({
         title: '¿Desea remover el siguiente curso? ' +  cursoARemover.nombre,
@@ -79,7 +83,6 @@ function removeCurso(id) {
         confirmButtonText: 'Sí, deseo borrarlo',
         cancelButtonText: 'No, no quiero'
       }).then((result) => {
-        console.log(result);
         if (result.isConfirmed) {
           Swal.fire(
             'Ha eliminado el curso de su Plan de Formación',
@@ -98,7 +101,11 @@ function removeCurso(id) {
 
 botonVaciar.addEventListener("click", () => {
     if(coursesCart.length === 0){
-        alert("No podés vaciar, porque no tenés ningún curso añadido")
+        Swal.fire(
+            'No podes vaciar, porque no tenés ningún curso añadido.',
+            '',
+            'error'
+          )
     } else{
         coursesCart.splice(0, coursesCart.length)
         localStorage.setItem('Cursos', JSON.stringify(coursesCart))
