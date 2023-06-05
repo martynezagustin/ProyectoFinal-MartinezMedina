@@ -1,6 +1,7 @@
 
 const cursosGlobal = []
 
+//Consumo de la API de courses JSON
 fetch("../js/courses.json")
 .then(response => response.json())
 .then(data => {
@@ -74,5 +75,9 @@ fetch("../js/courses.json")
     cargarEvento()
 })
 .catch(error => {
-    alert("Los cursos no pueden cargar porque ocurrió el siguiente error: " + error)
+    Swal.fire(
+        'Los cursos no pueden cargar porque ocurrió el siguiente error: ' + error,
+        '',
+        'error'
+      )
 })
