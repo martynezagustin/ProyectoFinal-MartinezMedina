@@ -25,7 +25,8 @@ function invocarCurso() {
         div.classList.add('d-flex')
         div.classList.add('flex-column')
         div.classList.add('p-3')
-        div.innerHTML = `<h2>Ocurrió el siguiente error: ${error}</h2>`
+        div.style.backgroundColor = "red"
+        div.innerHTML = `<h2>Ocurrió el siguiente error: ${error}. Inténtalo en otro momento.</h2>`
         contenedorCurso.appendChild(div)
     }
 },1000)
