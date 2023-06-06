@@ -3,8 +3,8 @@ const counterCourses = document.getElementById('count-course')
 const botonVaciar = document.getElementById('vaciar-carrito')
 
 let coursesCart = JSON.parse(localStorage.getItem('Cursos')) || []
-//funcionalidad de botones de ADD
 
+//funcionalidad de botones de ADD
 const cargarEvento = () => {
     const buttonAdd = document.querySelectorAll('.btn-add')
     buttonAdd.forEach((agregar) => {
@@ -38,11 +38,13 @@ function agregarAlPlan(id) {
                 background: "linear-gradient(to right, rgb(52,52,52), rgb(12, 12, 12))",
             }
         }).showToast();
-
+        
         localStorage.setItem("Cursos", JSON.stringify(coursesCart))
         renderizarCarrito()
     }
 }
+
+
 //actualiza el carrito
 function renderizarCarrito() {
     containerFormacion.innerHTML = ""
@@ -60,15 +62,31 @@ function renderizarCarrito() {
             <p class="card-duration"><b>Duración: <i>${curso.duracion}</i></b></p>
             <p class="card-text">${curso.descripcion}</p>
             <button class="btn btn-remove btn-secondary" data-id=${curso.id} id="curso-${curso.id}">ELIMINAR</button>
+            <button class="btn btn-information btn-secondary" data-id=${curso.id} id="info-${curso.id}">VER INFO</button>
             </div>`
             containerFormacion.append(div)
             const btnRemove = document.querySelectorAll('.btn-remove')
+            //llamar a la función de remover curso
             btnRemove.forEach((boton) => {
                 boton.addEventListener("click", removeCurso)
+            })
+            //funcionalidad en el carrito para la info
+            const btnInfo = document.querySelectorAll('.btn-information')
+            btnInfo.forEach((boton) => {
+                boton.addEventListener("click", (e) => {
+                    const cursoSelected = coursesCart.find((c) => c.id === parseInt(e.target.dataset.id))
+                    Swal.fire(
+                        cursoSelected.nombre,
+                        cursoSelected.descripcionLarga,
+                        'info'
+                      )
+                })
             })
         })
     }
 }
+
+
 //remueve el curso
 function removeCurso(e) {
     const cursoARemover = coursesCart.find((curso) => curso.id === parseInt(e.target.dataset.id))
@@ -99,6 +117,7 @@ function removeCurso(e) {
       })
 }
 
+//si queremos vaciar, y está en 0, tira el siguiente error
 botonVaciar.addEventListener("click", () => {
     if(coursesCart.length === 0){
         Swal.fire(
