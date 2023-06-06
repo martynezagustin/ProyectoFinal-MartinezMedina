@@ -5,6 +5,7 @@ const cursosGlobal = []
 fetch("../js/courses.json")
 .then(response => response.json())
 .then(data => {
+    //invocación de data cursos
     const cursos = data["cursos"]
 
     const rowProgramacion = document.querySelector('.programacion')
@@ -14,7 +15,6 @@ fetch("../js/courses.json")
 
     const cursosProgram = cursos.filter((curso) => curso.categoria === 'Programación')
     const cursosMarketingAndEmpresas = cursos.filter((curso) => curso.categoria === 'Marketing y Empresas')
-    // let cursosPlanFormacionJSON = (idCurso, curso) => {localStorage.setItem(idCurso, curso)}
     
     
     //crea cursos en marketing y empresas por cada uno en categoría 'Programación'
@@ -64,7 +64,6 @@ fetch("../js/courses.json")
     //funcionalidad de DOM que guarda el curso seleccionado para generarlo en otra pág
     btnVerCurso.forEach((boton) => {
         boton.addEventListener("click", (e) => {
-    
             const referenciaHTML = e.target.id
             const curso = cursos.find((c) => c.referenceHTML === referenciaHTML)
             localStorage.setItem('cursoSeleccionado', JSON.stringify(curso))
